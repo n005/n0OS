@@ -39,7 +39,7 @@ Test it with qemu CD/DVD:
 - [ ] Memory management (paging, heap mem, virtual mem, dynamic memory allocation etc.)
 - [ ] Filesystem
 - [ ] Shell
-- [ ] User mode
+- [ ] User space
 
 # References
 
