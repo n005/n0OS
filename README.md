@@ -29,9 +29,9 @@ Test it with qemu CD/DVD:
 
 # Goals
 
-- [ ] Bootloader
-- [ ] Switch to Protected mode
-- [ ] Assembly to C/Rust transition
+- [x] Bootloader
+- [x] Switch to Protected mode
+- [x] Assembly to C/Rust transition
 - [ ] Interrupt handling & CPU exceptions handling
 - [ ] Double fault handling
 - [ ] Tiny i/o (screen VGA text mode & keyboard) support
@@ -50,3 +50,4 @@ Test it with qemu CD/DVD:
 - [Little OS book](https://littleosbook.github.io/)
 - [Assembly docs](https://www.felixcloutier.com/x86/)
 - [Gladir docs](https://www.gladir.com/CODER/ASM8086/index.htm)
+- [Intermezzos](https://intermezzos.github.io)

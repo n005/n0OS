@@ -1,19 +1,23 @@
 #![no_std]
 #![no_main]
 
-use core::arch::asm;
+mod framebuffer;
 
-use bootloader_api::{entry_point, BootInfo};
+use core::{arch::asm, fmt::Write};
+
+use bootloader_api::{entry_point, info::FrameBufferInfo, BootInfo};
+use framebuffer::FrameBufferWriter;
 
 bootloader_api::entry_point!(kernel_main);
 
 #[no_mangle]
 fn kernel_main(boot_info: &'static mut bootloader_api::BootInfo) -> ! {
-    let width = &boot_info.framebuffer.as_ref().unwrap().info().width;
-    let height = &boot_info.framebuffer.as_ref().unwrap().info().height;
-    let pixelheight = &boot_info.framebuffer.as_ref().unwrap().info().bytes_per_pixel;
-    let pitch = &boot_info.framebuffer.as_ref().unwrap().info().stride;
-    let colorinfo = &boot_info.framebuffer.as_ref().unwrap().info().pixel_format;
+    let framebufferinfo = &boot_info.framebuffer.as_ref().unwrap().info();
+    let width = &framebufferinfo.width;
+    let height = &framebufferinfo.height;
+    let pixelheight = &framebufferinfo.bytes_per_pixel;
+    let pitch = &framebufferinfo.stride;
+    let colorinfo = &framebufferinfo.pixel_format;
 
     let vga_buffer = boot_info.framebuffer.as_mut().unwrap().buffer_mut();
 
@@ -25,6 +29,11 @@ fn kernel_main(boot_info: &'static mut bootloader_api::BootInfo) -> ! {
         }
     }
 
+    putpixel(vga_buffer, 0, 0, colorToU32(255, 255, 255, colorinfo), *pixelheight, *pitch);
+    putpixel(vga_buffer, *width-1, *height-1, colorToU32(255, 255, 255, colorinfo), *pixelheight, *pitch);
+
+    let mut framebuffer2 = FrameBufferWriter::new(vga_buffer, *framebufferinfo);
+    framebuffer2.write_char('c');
     loop {}
 }
 
