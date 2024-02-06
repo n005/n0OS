@@ -60,7 +60,7 @@ impl FrameBufferWriter {
             x_pos: 0,
             y_pos: 0,
         };
-        logger.clear();
+        //logger.clear();
         logger
     }
 

@@ -21,7 +21,7 @@ fn kernel_main(boot_info: &'static mut bootloader_api::BootInfo) -> ! {
 
     let vga_buffer = boot_info.framebuffer.as_mut().unwrap().buffer_mut();
 
-    let mut color = colorToU32(0, 0, 255, colorinfo);
+    let mut color = colorToU32(243, 86, 205, colorinfo);
 
     for i in 0.. *width {
         for j in 0.. *height {
@@ -33,7 +33,8 @@ fn kernel_main(boot_info: &'static mut bootloader_api::BootInfo) -> ! {
     putpixel(vga_buffer, *width-1, *height-1, colorToU32(255, 255, 255, colorinfo), *pixelheight, *pitch);
 
     let mut framebuffer2 = FrameBufferWriter::new(vga_buffer, *framebufferinfo);
-    framebuffer2.write_char('c');
+    framebuffer2.write_str("Welcome to the N0OS ! \n My RUST Operation System!").unwrap();
+
     loop {}
 }
 
