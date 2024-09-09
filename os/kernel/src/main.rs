@@ -21,7 +21,7 @@ fn kernel_main(boot_info: &'static mut bootloader_api::BootInfo) -> ! {
 
     let vga_buffer = boot_info.framebuffer.as_mut().unwrap().buffer_mut();
 
-    let mut color = colorToU32(243, 86, 205, colorinfo);
+    let mut color = colorToU32(192, 21, 98, colorinfo);
 
     for i in 0.. *width {
         for j in 0.. *height {
